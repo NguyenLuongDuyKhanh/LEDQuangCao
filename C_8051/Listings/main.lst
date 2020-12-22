@@ -1,0 +1,161 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              12/22/2020 10:10:50 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\Installation\Keil\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Lis
+                    -tings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          //#include<reg52.h>
+   2          #include <REGX51.H>
+   3          typedef enum Row {
+   4              R1,
+   5              R2,
+   6              R3,
+   7              R4,
+   8              R5,
+   9              R6,
+  10              R7,
+  11              R8
+  12          }Row;
+  13          
+  14          #define SDI  P3_0 //Chan 14 data
+  15          #define CLK  P3_1 //Chan 11 clock
+  16          #define STR  P3_2 //Chan 12 chot
+  17          
+  18          
+  19          
+  20          unsigned char i;
+  21          //unsigned char ma[10]={0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,0x00}; //Mang LED
+  22          unsigned char ma[10]={0x00,0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80,0x00}; //Mang LED
+  23          void delay(unsigned char time){ //Chuong trinh tao tre 50ms
+  24   1          unsigned char t;
+  25   1          for(t=0;t<time;t++){
+  26   2              TH0=0x3c;
+  27   2              TL0=0xb0;
+  28   2              TR0=1;
+  29   2              while(!TF0);
+  30   2              TF0=TR0=0;
+  31   2          }
+  32   1      }
+  33          void truyen(unsigned char b1){
+  34   1      /*Chuong trinh truyen du lieu vao 3 IC 74HC595
+  35   1      Cac ban co the mo rong them bao nhieu IC tuy thich
+  36   1      bang cach them code theo mau cua chuong trinh goc
+  37   1      */
+  38   1          unsigned char i,Q;
+  39   1          //Q=b3; for(i=0;i<8;i++){SDI=Q&0x80;CLK=0;CLK=1;Q<<=1;} //ic 3
+  40   1          //Q=b2; for(i=0;i<8;i++){SDI=Q&0x80;CLK=0;CLK=1;Q<<=1;} //ic 2
+  41   1          //Q=b1; 
+  42   1        Q=0xff;
+  43   1          for(i=0;i<8;i++)
+  44   1          {
+  45   2            SDI=Q&0x80;
+  46   2            CLK=0;
+  47   2            CLK=1;
+  48   2            Q<<=1;
+  49   2          } //ic 1
+  50   1          delay(5);
+  51   1          STR=0; STR=1; //Chot hien thi du lieu
+  52   1          //P3 &= ~(1<<STR);
+  53   1          //P3 |=
+  54   1      }
+C51 COMPILER V9.60.0.0   MAIN                                                              12/22/2020 10:10:50 PAGE 2   
+
+*** WARNING C280 IN LINE 33 OF main.c: 'b1': unreferenced local variable
+  55          
+  56          unsigned int pinMatrix [8][3] = {
+  57            {0,0,0},
+  58            {1,0,0},
+  59            {0,1,0},
+  60            {1,1,0},
+  61            {0,0,1},
+  62            {1,0,1},
+  63            {0,1,1},
+  64            {1,1,1}
+  65          };
+  66          
+  67          void delay_ms(unsigned int);
+  68          void RowScaner();
+  69          
+  70          Row CurrentRow = R1;
+  71          void main (void)
+  72          {
+  73   1        int i = 0;
+  74   1        int a = 1000;
+  75   1        P2 = 0x00;
+  76   1        P3 = 0x00;
+  77   1        TMOD=0x01;    //Khoi tao timer 0 che do 16bit
+  78   1        truyen(0xff); 
+  79   1        while(1)
+  80   1        {
+  81   2          /*
+  82   2          for (i=0;i<8;i++)
+  83   2          {
+  84   2            P2=i;
+  85   2            delay_ms(100);
+  86   2          }
+  87   2          */
+  88   2          /*
+  89   2          switch(CurrentRow)
+  90   2          {
+  91   2            case R1:
+  92   2              P2=R1;
+  93   2              break
+  94   2            case R2:
+  95   2            case R3:
+  96   2            case R4:
+  97   2            case R5:
+  98   2            case R6:
+  99   2            case R7:
+ 100   2            case R8:
+ 101   2          }*/
+ 102   2          //P2=CurrentRow;
+ 103   2          //RowScaner();
+ 104   2          /*
+ 105   2              for(i=0;i<10;i++){      //Truyen 3 du lieu khac nhau vao 3 ic
+ 106   2              truyen(0xff,ma[i],ma[9-i]);    //Truyen du lieu vao 3 IC
+ 107   2              delay(5);
+ 108   2              truyen(0x00,ma[i-1],ma[9-i]);
+ 109   2              delay(5);
+ 110   2          }
+ 111   2          */
+ 112   2          truyen(0xff); 
+ 113   2          delay(5);
+ 114   2        }
+ 115   1      }
+C51 COMPILER V9.60.0.0   MAIN                                                              12/22/2020 10:10:50 PAGE 3   
+
+ 116          
+ 117          void delay_ms(unsigned int t)
+ 118          {
+ 119   1          unsigned int i,j;
+ 120   1          for(i=0;i<t;i++)
+ 121   1          for(j=0;j<1275;j++);
+ 122   1      }
+ 123          
+ 124          void RowScaner()
+ 125          {
+ 126   1        delay_ms(1);
+ 127   1        CurrentRow++;
+ 128   1        if(CurrentRow==8)
+ 129   1          {
+ 130   2            CurrentRow=R1;
+ 131   2          }
+ 132   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    152    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     60       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
