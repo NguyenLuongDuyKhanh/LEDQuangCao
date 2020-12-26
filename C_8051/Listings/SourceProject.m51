@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    12/26/2020  13:30:19  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    12/26/2020  15:13:36  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
@@ -23,52 +23,47 @@ LINK MAP OF MODULE:  .\Objects\SourceProject (?C_STARTUP)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0025H     UNIT         ?DT?MAIN
-            DATA    002DH     0002H     UNIT         _DATA_GROUP_
-            IDATA   002FH     0001H     UNIT         ?STACK
+            DATA    0008H     005AH     UNIT         ?DT?MAIN
+            IDATA   0062H     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
                     0003H     07FDH                  *** GAP ***
-            CODE    0800H     00C4H     UNIT         ?PR?COLUMNSCANNER?MAIN
-            CODE    08C4H     008CH     UNIT         ?C_C51STARTUP
-            CODE    0950H     002BH     UNIT         ?C_INITSEG
-            CODE    097BH     0025H     UNIT         ?PR?_TRUYEN?MAIN
-            CODE    09A0H     0020H     UNIT         ?PR?_DELAY_MS?MAIN
-            CODE    09C0H     001AH     UNIT         ?PR?_DELAY?MAIN
-            CODE    09DAH     0016H     UNIT         ?PR?MAIN?MAIN
-            CODE    09F0H     0013H     UNIT         ?PR?ROWSCANNER?MAIN
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0087H     UNIT         ?PR?MAIN?MAIN
+            CODE    0913H     0047H     UNIT         ?C_INITSEG
+            CODE    095AH     0036H     UNIT         ?PR?COLUMNSCANNER?MAIN
+            CODE    0990H     0013H     UNIT         ?PR?ROWSCANNER?MAIN
 
 
 
 OVERLAY MAP OF MODULE:   .\Objects\SourceProject (?C_STARTUP)
 
 
-SEGMENT                          DATA_GROUP 
-  +--> CALLED SEGMENT          START    LENGTH
-----------------------------------------------
-?C_C51STARTUP                  -----    -----
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
   +--> ?PR?MAIN?MAIN
   +--> ?C_INITSEG
 
-?PR?MAIN?MAIN                  -----    -----
+?PR?MAIN?MAIN
+  +--> ?PR?ROWSCANNER?MAIN
   +--> ?PR?COLUMNSCANNER?MAIN
-
-?PR?COLUMNSCANNER?MAIN         002DH    0002H
 
 
 
 SYMBOL TABLE OF MODULE:  .\Objects\SourceProject (?C_STARTUP)
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  13:30:19  PAGE 2
-
-
 
   VALUE           TYPE          NAME
   ----------------------------------
 
   -------         MODULE        ?C_STARTUP
-  C:08C4H         SEGMENT       ?C_C51STARTUP
-  I:002FH         SEGMENT       ?STACK
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  15:13:36  PAGE 2
+
+
+  C:0800H         SEGMENT       ?C_C51STARTUP
+  I:0062H         SEGMENT       ?STACK
   C:0000H         PUBLIC        ?C_STARTUP
   D:00E0H         SYMBOL        ACC
   D:00F0H         SYMBOL        B
@@ -77,7 +72,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\SourceProject (?C_STARTUP)
   N:0000H         SYMBOL        IBPSTACK
   N:0100H         SYMBOL        IBPSTACKTOP
   N:0080H         SYMBOL        IDATALEN
-  C:08C7H         SYMBOL        IDATALOOP
+  C:0803H         SYMBOL        IDATALOOP
   N:0000H         SYMBOL        PBPSTACK
   N:0100H         SYMBOL        PBPSTACKTOP
   N:0000H         SYMBOL        PDATALEN
@@ -86,185 +81,121 @@ SYMBOL TABLE OF MODULE:  .\Objects\SourceProject (?C_STARTUP)
   N:0000H         SYMBOL        PPAGEENABLE
   D:00A0H         SYMBOL        PPAGE_SFR
   D:0081H         SYMBOL        SP
-  C:08C4H         SYMBOL        STARTUP1
+  C:0800H         SYMBOL        STARTUP1
   N:0000H         SYMBOL        XBPSTACK
   N:0000H         SYMBOL        XBPSTACKTOP
   N:0000H         SYMBOL        XDATALEN
   N:0000H         SYMBOL        XDATASTART
   C:0000H         LINE#         126
-  C:08C4H         LINE#         133
-  C:08C6H         LINE#         134
-  C:08C7H         LINE#         135
-  C:08C8H         LINE#         136
-  C:08CAH         LINE#         185
-  C:08CDH         LINE#         196
+  C:0800H         LINE#         133
+  C:0802H         LINE#         134
+  C:0803H         LINE#         135
+  C:0804H         LINE#         136
+  C:0806H         LINE#         185
+  C:0809H         LINE#         196
   -------         ENDMOD        ?C_STARTUP
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:09F0H         PUBLIC        RowScanner
-  C:09C0H         PUBLIC        _delay
+  C:0990H         PUBLIC        RowScanner
   B:00B0H.0       PUBLIC        P3_0
   B:00B0H.1       PUBLIC        P3_1
   B:00B0H.2       PUBLIC        P3_2
   D:0008H         PUBLIC        CurrentRow
-  D:0009H         PUBLIC        example1
-  D:0011H         PUBLIC        example2
-  D:0019H         PUBLIC        example3
-  C:09DAH         PUBLIC        main
-  C:097BH         PUBLIC        _truyen
-  D:0021H         PUBLIC        GlobalScannerStatus
-  C:0800H         PUBLIC        ColumnScanner
-  B:0088H.5       PUBLIC        TF0
-  D:008CH         PUBLIC        TH0
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  13:30:19  PAGE 3
-
-
-  D:0022H         PUBLIC        ma
-  D:008AH         PUBLIC        TL0
-  C:09A0H         PUBLIC        _delay_ms
-  B:0088H.4       PUBLIC        TR0
-  D:002CH         PUBLIC        i
+  C:088CH         PUBLIC        main
+  D:0009H         PUBLIC        GlobalScannerStatus
+  C:095AH         PUBLIC        ColumnScanner
+  D:000AH         PUBLIC        letterJ
+  D:0012H         PUBLIC        letterK
+  D:001AH         PUBLIC        letterL
+  D:0022H         PUBLIC        letterM
+  D:002AH         PUBLIC        letterN
+  D:0032H         PUBLIC        letterO
+  D:003AH         PUBLIC        example
+  D:0042H         PUBLIC        buffer
   -------         PROC          MAIN
-  C:09DAH         LINE#         51
-  C:09DAH         LINE#         52
-  C:09DAH         LINE#         53
-  C:09DDH         LINE#         54
-  C:09E0H         LINE#         55
-  C:09E2H         LINE#         57
-  C:09E5H         LINE#         58
-  C:09E5H         LINE#         59
-  C:09E5H         LINE#         67
-  C:09EBH         LINE#         68
-  C:09EBH         LINE#         69
-  C:09EEH         LINE#         70
-  C:09EEH         LINE#         80
-  -------         ENDPROC       MAIN
-  -------         PROC          _DELAY_MS
-  D:0006H         SYMBOL        t
-  -------         DO            
-  D:0004H         SYMBOL        i
-  D:0002H         SYMBOL        j
-  -------         ENDDO         
-  C:09A0H         LINE#         83
-  C:09A0H         LINE#         84
-  C:09A0H         LINE#         86
-  C:09AAH         LINE#         87
-  C:09BFH         LINE#         89
-  -------         ENDPROC       _DELAY_MS
-  -------         PROC          ROWSCANNER
-  C:09F0H         LINE#         91
-  C:09F0H         LINE#         92
-  C:09F0H         LINE#         93
-  C:09F3H         LINE#         95
-  C:09F9H         LINE#         96
-  C:09F9H         LINE#         97
-  C:09FBH         LINE#         98
-  C:09FFH         LINE#         99
-  C:0A02H         LINE#         100
-  -------         ENDPROC       ROWSCANNER
-  -------         PROC          _DELAY
-  D:0007H         SYMBOL        time
-  -------         DO            
-  D:0006H         SYMBOL        t
-  -------         ENDDO         
-  C:09C0H         LINE#         101
-  C:09C0H         LINE#         103
-  C:09C7H         LINE#         104
-  C:09CAH         LINE#         105
-  C:09CDH         LINE#         106
-  C:09CFH         LINE#         107
-  C:09D2H         LINE#         108
-  C:09D6H         LINE#         109
-  C:09D9H         LINE#         110
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  13:30:19  PAGE 4
-
-
-  -------         ENDPROC       _DELAY
-  -------         PROC          COLUMNSCANNER
-  -------         DO            
-  D:0002H         SYMBOL        column_number
-  D:002DH         SYMBOL        row_number
-  D:0007H         SYMBOL        temp
-  -------         ENDDO         
-  C:0800H         LINE#         112
-  C:0800H         LINE#         113
-  C:0800H         LINE#         118
-  C:0803H         LINE#         119
-  C:0808H         LINE#         120
-  C:0808H         LINE#         121
-  C:080CH         LINE#         122
-  C:080CH         LINE#         123
-  C:081EH         LINE#         124
-  C:0821H         LINE#         125
-  C:0823H         LINE#         126
-  C:0825H         LINE#         127
-  C:0830H         LINE#         129
-  C:0834H         LINE#         130
-  C:0834H         LINE#         131
-  C:0846H         LINE#         132
-  C:0849H         LINE#         133
-  C:084BH         LINE#         134
-  C:084DH         LINE#         135
-  C:0858H         LINE#         137
-  C:085CH         LINE#         138
-  C:085CH         LINE#         139
-  C:086EH         LINE#         140
-  C:0871H         LINE#         141
-  C:0873H         LINE#         142
-  C:0875H         LINE#         143
-  C:0880H         LINE#         145
-  C:0884H         LINE#         146
-  C:0884H         LINE#         147
-  C:0896H         LINE#         148
-  C:0899H         LINE#         149
-  C:089BH         LINE#         150
-  C:089DH         LINE#         151
-  C:08A8H         LINE#         152
-  C:08ACH         LINE#         153
-  C:08AFH         LINE#         154
-  C:08C0H         LINE#         155
-  C:08C3H         LINE#         156
-  -------         ENDPROC       COLUMNSCANNER
-  -------         PROC          _TRUYEN
-  D:0007H         SYMBOL        b1
   -------         DO            
   D:0006H         SYMBOL        i
-  D:0007H         SYMBOL        Q
   -------         ENDDO         
-  C:097BH         LINE#         158
-  C:097BH         LINE#         167
-  C:097BH         LINE#         168
-  C:0987H         LINE#         169
-  C:0987H         LINE#         170
-BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  13:30:19  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  15:13:36  PAGE 3
 
 
-  C:098BH         LINE#         171
-  C:098DH         LINE#         172
-  C:098FH         LINE#         173
-  C:0993H         LINE#         174
-  C:0996H         LINE#         175
-  C:099BH         LINE#         176
-  C:099DH         LINE#         177
-  C:099FH         LINE#         178
-  -------         ENDPROC       _TRUYEN
+  C:088CH         LINE#         3
+  C:088CH         LINE#         4
+  C:088CH         LINE#         6
+  C:088FH         LINE#         7
+  C:088FH         LINE#         8
+  C:089BH         LINE#         9
+  C:08A6H         LINE#         10
+  C:08A9H         LINE#         11
+  C:08A9H         LINE#         12
+  C:08B5H         LINE#         13
+  C:08C0H         LINE#         14
+  C:08C3H         LINE#         15
+  C:08C3H         LINE#         16
+  C:08CFH         LINE#         17
+  C:08DAH         LINE#         18
+  C:08DDH         LINE#         19
+  C:08DDH         LINE#         20
+  C:08E9H         LINE#         21
+  C:08F4H         LINE#         23
+  C:08F7H         LINE#         24
+  C:08FAH         LINE#         25
+  C:08FDH         LINE#         26
+  C:08FFH         LINE#         29
+  C:08FFH         LINE#         30
+  C:08FFH         LINE#         31
+  C:0905H         LINE#         32
+  C:0905H         LINE#         33
+  C:0908H         LINE#         34
+  C:0908H         LINE#         35
+  C:090EH         LINE#         36
+  C:090EH         LINE#         37
+  C:0911H         LINE#         38
+  C:0911H         LINE#         39
+  -------         ENDPROC       MAIN
+  -------         PROC          ROWSCANNER
+  C:0990H         LINE#         42
+  C:0990H         LINE#         43
+  C:0990H         LINE#         44
+  C:0993H         LINE#         46
+  C:0999H         LINE#         47
+  C:0999H         LINE#         48
+  C:099BH         LINE#         49
+  C:099FH         LINE#         50
+  C:09A2H         LINE#         51
+  -------         ENDPROC       ROWSCANNER
+  -------         PROC          COLUMNSCANNER
+  -------         DO            
+  D:0006H         SYMBOL        column_number
+  D:0005H         SYMBOL        temp
+  -------         ENDDO         
+  C:095AH         LINE#         53
+  C:095AH         LINE#         54
+  C:095AH         LINE#         59
+  C:095DH         LINE#         61
+  C:0961H         LINE#         62
+  C:0961H         LINE#         63
+  C:0973H         LINE#         64
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  12/26/2020  15:13:36  PAGE 4
+
+
+  C:0976H         LINE#         65
+  C:0978H         LINE#         66
+  C:097AH         LINE#         67
+  C:0985H         LINE#         68
+  C:0987H         LINE#         69
+  C:0989H         LINE#         70
+  C:098CH         LINE#         72
+  C:098FH         LINE#         73
+  -------         ENDPROC       COLUMNSCANNER
   -------         ENDMOD        MAIN
 
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_DELAY_MS?MAIN
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?ROWSCANNER?MAIN
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_TRUYEN?MAIN
-
 ******************************************************************************
-* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0185H BYTE (18%) *
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0125H BYTE (14%) *
 ******************************************************************************
 
-Program Size: data=48.0 xdata=0 code=518
-LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)
+Program Size: data=99.0 xdata=0 code=422
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
