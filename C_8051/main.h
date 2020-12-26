@@ -1,9 +1,10 @@
 #include <REGX51.H>
 
-#define SDI  P3_0 
-#define CLK  P3_1 
-#define STR  P3_2 
+#define SDI  P3_0 //Data pin of HC595 connected to P3.0
+#define CLK  P3_1 //Clock pin of HC595 connected to P3.1
+#define STR  P3_2 //Trigger pin of HC595 connected to P3.3
 
+//To recognize which row is being scaned. It has 8 rows
 typedef enum Row {
     R1,
     R2,
@@ -12,9 +13,10 @@ typedef enum Row {
 		R5,
 		R6,
 		R7,
-	R8
+		R8
 }Row;
 
+//To make sure only 1 HC works at the time
 typedef enum Scanner_status {
     HC138,
 		HC595,
@@ -24,10 +26,12 @@ typedef enum Scanner_status {
 void RowScanner();
 void ColumnScanner();
 
-Scanner_status GlobalScannerStatus;
-unsigned char buffer[32];
+Scanner_status GlobalScannerStatus;		//Used as status of IC scaner, only 1 IC works at the time, when HC138 works HC595 blocked and the other
+unsigned char buffer[32];							//Used as column buffer, it has 32 columns
 unsigned char example[8]={0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f, 0x0f};
 Row CurrentRow;
+
+//Font
 /*
 unsigned char letterA[8]={0x1f, 0x24, 0x44, 0x44, 0x7f, 0x00, 0x00, 0x00};
 unsigned char letterB[8]={0x7F, 0x49, 0x49, 0x49, 0x36, 0x00, 0x00, 0x00};
